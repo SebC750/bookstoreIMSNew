@@ -1,0 +1,25 @@
+
+<h2>  <%= book_list.title %> </h2>
+
+<table class="table">
+    <thead>
+       <tr>
+          <th> Book title </th>
+          <th> Author </th>
+          <th> Description </th>
+          <th> Price </th>
+       </tr>
+    </thead>
+    <tbody>
+       <%= @books.each do |book| %>
+         <tr>
+               <td> @book.bookTitle </td>
+               <td> @book.author </td>
+               <td> @book.description </td>
+               <td> @book.price </td>
+         </tr>
+       <%= end %>
+    </tbody>
+</table>
+   
+

@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div class="container mt-5">
+<%= render @book_list %>
+<div class="nav align-items-center justify-content-center gap-2">
+  <%= link_to "Edit this book list", edit_book_list_path(@book_list), class: "btn btn-danger" %>
+  <%= link_to "Back to book lists", book_lists_path, class: "btn btn-danger"%>
+  <%= button_to "Destroy this book list", @book_list, method: :delete, class: "btn btn-danger"%>
+</div>
+</div>
