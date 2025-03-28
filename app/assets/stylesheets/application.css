@@ -8,3 +8,10 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+textarea{
+    resize: none;
+}
+
+.footer-body{
+
+}

@@ -1,25 +1,45 @@
+<% if alert %>
+   <div class="alert alert-danger">
+         <%= alert %>
+   </div>
+<% end %>
 
 <h2>  <%= book_list.title %> </h2>
-
+<p>  <%= book_list.listDescription %> </p>
+<hr>
+<% if @books.exists? %>
 <table class="table">
-    <thead>
+   <thead>
        <tr>
-          <th> Book title </th>
-          <th> Author </th>
-          <th> Description </th>
-          <th> Price </th>
+            <th> Book title </th>
+            <th> Author </th>
+            <th> Description </th>
+            <th> Price </th>
+            <th> Options </th>
        </tr>
-    </thead>
-    <tbody>
-       <%= @books.each do |book| %>
-         <tr>
-               <td> @book.bookTitle </td>
-               <td> @book.author </td>
-               <td> @book.description </td>
-               <td> @book.price </td>
-         </tr>
-       <%= end %>
-    </tbody>
+   </thead>
+ 
+   <tbody>
+       <% @books.each do |book| %>
+        <tr>
+           <td> <%= book.bookTitle %> </td>
+           <td> <%= book.author %> </td>
+           <td> <%= book.description %> </td>
+           <td> $ <%= book.price %> </td>
+           <td class="d-flex gap-2">
+              <%= link_to "Edit", edit_book_list_book_path(@book_list, book), class: "btn btn-danger btn-sm" %>
+              <%= button_to "Delete", book_list_book_path(@book_list, book), method: :delete, class: "btn btn-danger btn-sm" %>        
+              </td>
+        </tr>
+       <% end %>     
+   </tbody>
 </table>
-   
 
+<% else %>
+   <p> No books to display. </p>
+<% end %>
+
+<%= link_to "Add a book", new_book_list_book_path(@book_list), class: "btn btn-danger" %>
+<div class="nav justify-content-center">
+    <%= pagy_bootstrap_nav(@book_pagy).html_safe if @book_pagy.pages > 1 %>
+</div>

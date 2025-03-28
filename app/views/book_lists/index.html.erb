@@ -1,5 +1,6 @@
-<p style="color: green"><%= notice %></p>
-
+<% if notice %>
+<p class="alert alert-success" style="color: green"><%= notice %></p>
+<% end %>
 <% content_for :title, "Book lists" %>
 
 <div class="container mt-5">
@@ -7,28 +8,27 @@
    <h1>Book lists</h1>
    <%= link_to "Create new list", new_book_list_path , class: "btn btn-danger" %>
 </div>
+<hr>
 
-<table class="table">
-   <thead>
-      <tr>
-          <th> Book name</th>
-          <th> Options </th>
-      </tr>
-
-   </thead>
-
-   <tbody>
+<div class="row">
       <% @book_lists.each do |book_list| %>
-         <tr>
-         <td>
-            <%= book_list.title %>
-         </td>     
-         <td>
-         <%= link_to "Open booklist", book_list, class: "btn btn-danger" %>
-       </td>
-         </tr>
-          
+      <div class="col-12 col-sm-6 col-md-4">
+         <div class="card border-0 shadow shadow-md">
+   <div class="card-body">
+       <h3 class="card-title"> <%= book_list.title %> </h3>
+       <p class="card-description"> <%= book_list.listDescription %> </p>
+       <div class="card-footer d-flex gap-2 justify-content-end">
+       <%= link_to "Open", book_list, class: "btn btn-danger btn-sm" %>
+       <%= link_to "Edit", edit_book_list_path(book_list), class: "btn btn-danger btn-sm" %>
+       <%= button_to "Delete", book_list, method: :delete, class: "btn btn-danger btn-sm"%>
+       </div>
+   </div>
+
+</div>
+     </div>     
        <% end %>
-   </tbody>
-</table>
+</div>
+<div class="d-flex justify-content-center">
+   <%= pagy_bootstrap_nav(@pagy).html_safe if @list_pagy.pages > 1 %>  
+  </div>
 </div>

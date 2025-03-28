@@ -13,10 +13,14 @@
 
   <div>
     <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, required: true, class: "form-control" %>
+
+    <%= form.label :listDescription, style: "display: block" %>
+    <%= form.text_field :listDescription, required: true, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mt-2">
+    <%= form.submit class: "btn btn-danger" %>
   </div>
+
 <% end %>

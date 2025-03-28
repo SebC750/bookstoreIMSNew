@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :books
-  resources :book_lists
+  resources :book_lists do
+    resources :books, only: [:new, :create, :edit, :update, :destroy]
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,5 +15,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "book_lists#index"
-  get "/about",to: "page#about"
+  get "/about",to: "pages#about"
 end

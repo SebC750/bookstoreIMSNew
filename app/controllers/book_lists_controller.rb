@@ -1,15 +1,14 @@
 class BookListsController < ApplicationController
   before_action :set_book_list, only: %i[ show edit update destroy ]
-
   # GET /book_lists or /book_lists.json
   def index
-    @book_lists = BookList.all
+    @list_pagy, @book_lists = pagy(BookList.all, items: 9)
   end
 
   # GET /book_lists/1 or /book_lists/1.json
   def show
-    @book_lists = BookList.all
-    @books = @book_lists.books
+    @book_list = BookList.find(params[:id])
+    @book_pagy, @books = pagy(@book_list.books, items: 10)
   end
 
   # GET /book_lists/new
@@ -24,7 +23,14 @@ class BookListsController < ApplicationController
   # POST /book_lists or /book_lists.json
   def create
     @book_list = BookList.new(book_list_params)
-
+    if @book_list.title =~ /\A\d+\z/
+      flash.now[:alert] = "Please enter a valid string for the list title, not a number."
+      render :new and return
+    end
+    if @book_list.listDescription =~ /\A\d+\z/
+      flash.now[:alert] = "Please enter a valid string for the list description, not a number."
+      render :new and return
+    end
     respond_to do |format|
       if @book_list.save
         format.html { redirect_to @book_list, notice: "Book list was successfully created." }
@@ -35,6 +41,7 @@ class BookListsController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /book_lists/1 or /book_lists/1.json
   def update
@@ -67,6 +74,6 @@ class BookListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_list_params
-      params.expect(book_list: [ :title ])
+      params.expect(book_list: [ :title, :listDescription])
     end
 end
