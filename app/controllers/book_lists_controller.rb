@@ -1,4 +1,5 @@
 class BookListsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_book_list, only: %i[ show edit update destroy ]
   # GET /book_lists or /book_lists.json
   def index
