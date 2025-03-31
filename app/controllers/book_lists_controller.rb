@@ -9,7 +9,7 @@ class BookListsController < ApplicationController
   # GET /book_lists/1 or /book_lists/1.json
   def show
     @book_list = current_user.book_lists.find(params[:id])
-    @book_pagy, @books = pagy(@book_list.books, items: 10)
+    @list_pagy, @books = pagy(@book_list.books, items: 10)
   end
 
   # GET /book_lists/new
