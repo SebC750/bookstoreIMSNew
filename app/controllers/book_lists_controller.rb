@@ -3,18 +3,18 @@ class BookListsController < ApplicationController
   before_action :set_book_list, only: %i[ show edit update destroy ]
   # GET /book_lists or /book_lists.json
   def index
-    @list_pagy, @book_lists = pagy(BookList.all, items: 9)
+    @list_pagy, @book_lists = pagy(current_user.book_lists, items: 9)
   end
 
   # GET /book_lists/1 or /book_lists/1.json
   def show
-    @book_list = BookList.find(params[:id])
+    @book_list = current_user.book_lists.find(params[:id])
     @book_pagy, @books = pagy(@book_list.books, items: 10)
   end
 
   # GET /book_lists/new
   def new
-    @book_list = BookList.new
+    @book_list = current_user.book_lists.new
   end
 
   # GET /book_lists/1/edit
@@ -23,7 +23,7 @@ class BookListsController < ApplicationController
 
   # POST /book_lists or /book_lists.json
   def create
-    @book_list = BookList.new(book_list_params)
+    @book_list = current_user.book_lists.new(book_list_params)
     if @book_list.title =~ /\A\d+\z/
       flash.now[:alert] = "Please enter a valid string for the list title, not a number."
       render :new and return
@@ -70,11 +70,11 @@ class BookListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book_list
-      @book_list = BookList.find(params.expect(:id))
+      @book_list = current_user.book_lists.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
     def book_list_params
-      params.expect(book_list: [ :title, :listDescription])
+      params.require(:book_list).permit(:title, :listDescription)
     end
 end

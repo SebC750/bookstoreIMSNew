@@ -11,6 +11,7 @@
 <table class="table">
    <thead>
        <tr>
+            <th> Position   </th>
             <th> Book title </th>
             <th> Author </th>
             <th> Description </th>
@@ -20,8 +21,9 @@
    </thead>
  
    <tbody>
-       <% @books.each do |book| %>
+       <% @books.each.with_index do |book, index| %>
         <tr>
+           <td> <%= index + 1 %> </td>
            <td> <%= book.bookTitle %> </td>
            <td> <%= book.author %> </td>
            <td> <%= book.description %> </td>

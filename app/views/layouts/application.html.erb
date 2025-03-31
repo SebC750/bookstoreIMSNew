@@ -27,7 +27,7 @@
 
   <body>
   
-    <%= render "shared/navbar"%>
+    <%= render "shared/navbar", user: current_user%>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>
