@@ -8,6 +8,7 @@
             <div class="dropdown">
             <button class="dropdown-toggle btn btn-danger" data-bs-toggle="dropdown" data-bs-target="#profile-dropdown"> Welcome, <%= current_user.email %> ! </button>
             <ul class="dropdown-menu" id="profile-dropdown">
+                 <li class="dropdown-item"> <%= link_to "Delete my account", registration_path(current_user), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your account? This cannot be undone.", class: "link-offset-2 link-underline link-underline-opacity-0 text-black" }%></li>
                  <li class="dropdown-item"> <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "link-offset-2 link-underline link-underline-opacity-0 text-black" %> </li>
             </ul> 
            </div>
