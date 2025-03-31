@@ -12,7 +12,7 @@
 
 <div class="row">
       <% @book_lists.each do |book_list| %>
-      <div class="col-12 col-sm-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4 mt-3">
          <div class="card border-0 shadow shadow-md">
    <div class="card-body">
        <h3 class="card-title"> <%= book_list.title %> </h3>
@@ -20,7 +20,7 @@
        <div class="card-footer d-flex gap-2 justify-content-end">
        <%= link_to "Open", book_list, class: "btn btn-danger btn-sm" %>
        <%= link_to "Edit", edit_book_list_path(book_list), class: "btn btn-danger btn-sm" %>
-       <%= button_to "Delete", book_list, method: :delete, class: "btn btn-danger btn-sm"%>
+       <%= button_to "Delete", book_list, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this book?"}, class: "btn btn-danger btn-sm"%>
        </div>
    </div>
 
@@ -28,7 +28,10 @@
      </div>     
        <% end %>
 </div>
-<div class="d-flex justify-content-center">
-   <%= pagy_bootstrap_nav(@pagy).html_safe if @list_pagy.pages > 1 %>  
+<div class="d-flex justify-content-center mt-3">
+   <% if @list_pagy&.pages.to_i > 1 %>
+  <%= pagy_bootstrap_nav(@list_pagy).html_safe %>
+<% end %>
+
   </div>
 </div>
