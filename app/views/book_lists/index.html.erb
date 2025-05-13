@@ -29,6 +29,6 @@
        <% end %>
 </div>
 <div class="d-flex justify-content-center mt-3">
-   <%= pagy_bootstrap_nav(@list_pagy).html_safe if @list_pagy.pages > 1 %>  
+   <%= pagy_bootstrap_nav(@list_pagy).html_safe if @list_pagy && @list_pagy.pages > 1 %>  
   </div>
 </div>

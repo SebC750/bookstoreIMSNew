@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_book_list
-  before_action :set_book, only: [:edit, :update, :destroy]
+  before_action :set_book, only: [ :edit, :update, :destroy ]
 
   # GET /books/new
   def new
@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   def create
     @book = @book_list.books.build(book_params)
     if @book.save
-      redirect_to @book_list, notice: 'Book was successfully added.'
+      redirect_to @book_list, notice: "Book was successfully added."
     else
       render :new
     end
@@ -59,6 +59,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:bookTitle, :author, :description, :price )
+      params.require(:book).permit(:bookTitle, :author, :description, :price)
     end
 end

@@ -6,7 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
-
+.kamal/env
 # Ignore all environment files.
 /.env*
 .kamal/secrets
@@ -15,7 +15,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+config/credentials.yml.enc
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/

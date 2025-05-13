@@ -43,5 +43,5 @@
 
 <%= link_to "Add a book", new_book_list_book_path(@book_list), class: "btn btn-danger" %>
 <div class="nav justify-content-center">
-    <%= pagy_bootstrap_nav(@book_pagy).html_safe if @book_pagy.pages > 1 %>
+    <%= pagy_bootstrap_nav(@book_pagy).html_safe if @book_pagy && @book_pagy.pages > 1 %>
 </div>
